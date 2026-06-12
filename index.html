@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense & Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Expense & Budget Visualizer</h1>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </header>
+
+    <section class="card balance-card">
+      <p class="label">Total Balance</p>
+      <h2 id="totalBalance" class="balance">$0.00</h2>
+    </section>
+
+    <section class="card limit-card">
+      <label for="spendingLimit">Monthly Spending Limit ($)</label>
+      <input type="number" id="spendingLimit" placeholder="e.g. 200" min="0" step="0.01" />
+      <p id="limitWarning" class="limit-warning hidden">⚠️ You have exceeded your spending limit!</p>
+    </section>
+
+    <section class="card form-card">
+      <h3>Add Transaction</h3>
+      <form id="transactionForm">
+        <div class="form-group">
+          <label for="itemName">Item Name</label>
+          <input type="text" id="itemName" placeholder="e.g. Coffee" />
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" placeholder="e.g. 5.50" step="0.01" />
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="">-- Select Category --</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Fun">Fun</option>
+          </select>
+          <div class="custom-category-row">
+            <input type="text" id="newCategory" placeholder="Add custom category" />
+            <button type="button" id="addCategoryBtn">Add</button>
+          </div>
+        </div>
+        <p id="formError" class="form-error hidden">Please fill in all fields.</p>
+        <button type="submit" class="btn-primary">Add Transaction</button>
+      </form>
+    </section>
+
+    <section class="grid-section">
+      <div class="card list-card">
+        <div class="list-header">
+          <h3>Transactions</h3>
+          <select id="sortSelect">
+            <option value="default">Sort: Default</option>
+            <option value="amountDesc">Amount: High to Low</option>
+            <option value="amountAsc">Amount: Low to High</option>
+            <option value="category">Category</option>
+          </select>
+        </div>
+        <ul id="transactionList" class="transaction-list"></ul>
+      </div>
+
+      <div class="card chart-card">
+        <h3>Spending by Category</h3>
+        <canvas id="spendingChart"></canvas>
+      </div>
+    </section>
+
+    <section class="card summary-card">
+      <h3>Monthly Summary</h3>
+      <div id="monthlySummary" class="monthly-summary"></div>
+    </section>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
